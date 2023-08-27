@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+void subsetSum(int set[], int n, int target, bool solution[], int index) {
+    if (target == 0) {
+        printf("Subset: { ");
+        for (int i = 0; i < n; i++) {
+            if (solution[i]) {
+                printf("%d ", set[i]);
+            }
+        }
+        printf("}\n");
+        return;
+    }
+
+    if (index >= n || target < 0) {
+        return;
+    }
+
+    solution[index] = true;
+    subsetSum(set, n, target - set[index], solution, index + 1);
+
+    solution[index] = false;
+    subsetSum(set, n, target, solution, index + 1);
+}
+
+int main() {
+    int set[] = {10, 7, 5, 18, 12, 20, 15};
+    int n = sizeof(set) / sizeof(set[0]);
+    int target = 35;
+
+    bool solution[n];
+    subsetSum(set, n, target, solution, 0);
+
+    return 0;
+}
