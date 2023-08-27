@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int binomialCoeff(int n, int k) {
+    if (k == 0 || k == n) {
+        return 1;
+    }
+    return binomialCoeff(n - 1, k - 1) + binomialCoeff(n - 1, k);
+}
+
+void printPascalTriangle(int numRows) {
+    for (int line = 0; line < numRows; line++) {
+        for (int space = 0; space < numRows - line - 1; space++) {
+            printf(" ");
+        }
+        for (int coeff = 0; coeff <= line; coeff++) {
+            printf("%d ", binomialCoeff(line, coeff));
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int numRows;
+    printf("Enter the number of rows for Pascal's triangle: ");
+    scanf("%d", &numRows);
+
+    printPascalTriangle(numRows);
+
+    return 0;
+}
